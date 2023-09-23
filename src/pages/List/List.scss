@@ -1,0 +1,21 @@
+.list-page {
+  .box {
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding-bottom: 80px;
+
+      > * {
+        flex: calc(50% - 50px);
+        align-self: stretch;
+      }
+    }
+
+    &__actions {
+      padding-top: 34px;
+    }
+  }
+}

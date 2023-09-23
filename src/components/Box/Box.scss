@@ -1,0 +1,40 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/mixins";
+
+.box {
+  padding: 40px;
+  border-radius: 12px;
+  background: $white;
+  box-shadow: 0 5px 20px 20px $black-03;
+
+  &__title {
+    color: $black;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+
+    strong {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  &__actions {
+    @include flex-center-between;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $mercury;
+    }
+  }
+
+  &.box--basket {
+    padding: 18px;
+  }
+}

@@ -1,0 +1,31 @@
+@import "../../../assets/styles/colors";
+@import "../../../assets/styles/mixins";
+
+
+.package-item {
+  @include flex-center-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: $concrete;
+  cursor: pointer;
+
+  &__title {
+    color: $black;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  &__amount {
+    color: $black;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+
+  &.disabled {
+    cursor: initial;
+    pointer-events: none;
+  }
+}

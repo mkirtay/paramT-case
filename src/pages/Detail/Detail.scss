@@ -1,0 +1,12 @@
+.detail-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .detail-box {
+    width: calc(100% - 384px)
+  }
+  .box--basket {
+    width: 355px;
+  }
+}

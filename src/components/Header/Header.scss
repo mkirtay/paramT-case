@@ -1,0 +1,15 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/mixins";
+
+
+.header {
+  @include flex-center-between;
+  padding: 28px;
+  background: $white;
+  box-shadow: 0 2px 11px 10px $black-02;
+  margin-bottom: 82px;
+
+  .ant-btn {
+
+  }
+}

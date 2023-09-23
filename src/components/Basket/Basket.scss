@@ -1,0 +1,17 @@
+.basket {
+  .box__title {
+    display: block;
+    padding-left: 12px;
+    margin-bottom: 10px;
+  }
+
+  .package-item {
+    + .package-item {
+      margin-top: 10px;
+    }
+  }
+
+  .ant-btn {
+    margin-top: 14px;
+  }
+}

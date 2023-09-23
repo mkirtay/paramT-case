@@ -1,0 +1,88 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/mixins";
+
+.package {
+  $package: &;
+  @include flex-start-start;
+  background: $concrete;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid $white;
+
+  &__image {
+    max-width: 192px;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__content {
+    width: 100%;
+    padding: 22px 22px 8px;
+    text-align: left;
+
+    &__head {
+      @include flex-center-between;
+      margin-bottom: 14px;
+
+      #{ $package }__strong {
+        color: $black;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 22px;
+      }
+    }
+
+    &__body {
+      margin-bottom: 28px;
+
+      span {
+        position: relative;
+        padding-left: 12px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          background: $silver;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          border: 1px solid $gray;
+          box-sizing: border-box;
+        }
+
+        + span {
+          margin-left: 26px;
+        }
+      }
+    }
+
+    &__foot {
+      position: relative;
+      padding-top: 7px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $alto;
+        width: 100%;
+        height: 1px;
+      }
+
+      .ticket {
+        + .ticket {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+
+  &--selected {
+    border: 2px solid $pistachio;
+  }
+}
