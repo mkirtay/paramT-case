@@ -1,8 +1,7 @@
 import {Box, Button, Package} from "../../components";
 import {get} from "../../utilities/http";
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import Layout from "../../components/Layout";
+import {useDispatch} from "react-redux";
 import './List.scss';
 import {IPackage} from "../../utilities/types";
 import TotalPrice from "../../utilities/functions/TotalPrice";
@@ -13,7 +12,7 @@ import {setSelectedPackages} from "../../store/slices/SelectedPackages";
 
 const List = ( ) => {
     const [list, setList] = useState<IPackage[]>([])
-    const [selectedItems, setSelectedItems] = useState<any>([])
+    const [selectedItems, setSelectedItems] = useState<IPackage[] | any>([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -28,7 +27,6 @@ const List = ( ) => {
     }, [])
 
     const onSelectPackage = (value: IPackage) => {
-        console.log(value, 'selectedItems')
         setSelectedItems([...selectedItems, value]);
     }
 
@@ -47,25 +45,23 @@ const List = ( ) => {
 
 
     return (
-        <Layout>
-            <div className="list-page">
-                <Box foot={<BoxActions />}>
-                    <div className="box__content">
-                        {list && list?.map((item: any, key: number) => {
-                            return <Package name={item?.name}
-                                            details={item?.details}
-                                            tags={item?.tags}
-                                            amount={item?.amount}
-                                            currency={item?.currency}
-                                            id={item?.id}
-                                            key={`package-${key}`}
-                                            onClick={() => onSelectPackage(item)}
-                            />
-                        }) }
-                    </div>
-                </Box>
-            </div>
-        </Layout>
+        <div className="list-page">
+            <Box foot={<BoxActions />}>
+                <div className="box__content">
+                    {list && list?.map((item: IPackage, key: number) => {
+                        return <Package name={item?.name}
+                                        details={item?.details}
+                                        tags={item?.tags}
+                                        amount={item?.amount}
+                                        currency={item?.currency}
+                                        id={item?.id}
+                                        key={`list-package-${key}`}
+                                        onClick={() => onSelectPackage(item)}
+                        />
+                    }) }
+                </div>
+            </Box>
+        </div>
     )
 }
 

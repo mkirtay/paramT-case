@@ -16,7 +16,7 @@ const Basket:FC<IBasket> = ({ title, data, setSelectedIndex, disable, onFinish }
         <div className="basket">
             <span className="box__title">{title}</span>
             { data?.map((item: IPackage, key: number) => {
-                return <PackageItem disabled={disable} data={item} setSelectedIndex={setSelectedIndex} />
+                return <PackageItem key={`package-item-${key}`} disabled={disable} data={item} setSelectedIndex={setSelectedIndex} />
             }) }
             <Form.Item>
                 { onFinish ? <Button onClick={() => onFinish()} htmlType="button" full>Continue</Button> : <Button  htmlType="submit" full>Payment</Button> }

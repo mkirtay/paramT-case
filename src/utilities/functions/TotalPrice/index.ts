@@ -1,6 +1,6 @@
 import {IPackage} from "../../types";
 
-const TotalPrice = (array: any) => {
+const TotalPrice = (array: IPackage[]) => {
     const getPrices = array?.map((item: IPackage) => {
         return item.amount;
     })

@@ -1,24 +1,26 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {MaskedInput} from "antd-mask-input";
 import classNames from "classnames";
-import {Input as AntdInput, InputProps} from "antd";
+import {InputProps} from "antd";
 
 interface IInput extends InputProps {
     label?: string,
     mask: string,
     numeric?: boolean,
-    value?: any
-    onChange?: any
+    value?: string
+    onChange?: any,
+
+    compClassName?: string,
 }
 
-const MaskInput : React.FC<IInput> = ({ label, value, mask, numeric, onChange, ...props })=>{
+const MaskInput : React.FC<IInput> = ({ label, value, compClassName, mask, numeric, onChange, ...props }, className)=>{
     const [inputDirty, setInputDirty] = useState<boolean>(true);
     const inputRef : React.RefObject<any> = useRef();
 
-    const onFocusInput = (e:any) => {
+    const onFocusInput = () => {
         setInputDirty(true)
     }
-    const onBlurInput = (e: any) => {
+    const onBlurInput = (e: React.FocusEvent<HTMLInputElement>) => {
         if ( e.target.value.length === 0 ) {
             setInputDirty(false)
         } else {
@@ -26,16 +28,16 @@ const MaskInput : React.FC<IInput> = ({ label, value, mask, numeric, onChange, .
         }
     }
 
-    const onChangeFunc = (e:any) => {
-        onChange(e.unmaskedValue)
+    const onChangeFunc = (e: string) => {
+        onChange(e)
     }
 
     return (
-        <div className={classNames('input input--masked', {'input--readonly': props.readOnly})}>
+        <div className={classNames('input input--masked', compClassName, {'input--readonly': props.readOnly})}>
             <MaskedInput
                 onBlur={onBlurInput}
                 onFocus={onFocusInput}
-                onChange={onChangeFunc}
+                onChange={(e) => onChangeFunc(e.unmaskedValue)}
                 ref={inputRef}
                 value={value}
                 className={classNames({ 'focused show': inputDirty })}

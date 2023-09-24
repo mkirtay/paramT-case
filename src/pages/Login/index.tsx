@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { login } from "../../store/slices/Auth/actions"
 
-
 interface IFormValues {
     fullName: string,
     email: string
@@ -34,7 +33,8 @@ const Login = () => {
                     rules={[
                         {
                             required: true,
-                        }
+                            message: "Please input your name!",
+                        },
                     ]}
                 >
                     <Input label="Name Surname"/>
@@ -43,8 +43,13 @@ const Login = () => {
                     name="email"
                     rules={[
                         {
-                            required: true
-                        }
+                            type: "email",
+                            message: "The input is not valid E-mail!",
+                        },
+                        {
+                            required: true,
+                            message: "Please input your E-mail!",
+                        },
                     ]}>
                     <Input label="E-mail"/>
                 </Form.Item>

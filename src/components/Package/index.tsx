@@ -5,11 +5,11 @@ import './Package.scss';
 
 import {IPackage} from "../../utilities/types";
 
-const Package:FC<IPackage> = ({ imagePath = '/images/image.png', name, details, tags, amount, currency, id, onClick }) => {
+const Package:FC<IPackage> = ({ imagePath = '/images/image.png', name, details, tags, amount, currency, id, onClick, ...props }) => {
     const ref = useRef(null);
     const [selected, setSelected] = useState(false)
 
-    const onSelectPackage = (e: any) => {
+    const onSelectPackage = () => {
         setSelected(!selected)
         onClick()
     }
@@ -23,9 +23,9 @@ const Package:FC<IPackage> = ({ imagePath = '/images/image.png', name, details, 
                     <span className="package__strong">{amount}{currency}</span>
                 </div>
                 <div className="package__content__body">
-                    { details.map((item: string) => {
+                    { details.map((item: string, key: number) => {
                         return (
-                            <span>{item}</span>
+                            <span key={`body-${key}`}>{item}</span>
                         )
                     }) }
                 </div>

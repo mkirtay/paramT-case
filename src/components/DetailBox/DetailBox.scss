@@ -12,7 +12,12 @@
   }
 
   &__description {
-    > div {
+    > span {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    &__head {
       @include flex-center-between;
       padding-bottom: 10px;
       margin-bottom: 22px;
@@ -24,6 +29,5 @@
         }
       }
     }
-
   }
 }

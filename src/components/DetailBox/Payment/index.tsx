@@ -1,15 +1,14 @@
 import {Form} from "antd";
 import {FC} from "react";
-import {Box, Input, MaskInput, TextArea} from "../../index";
+import {Box, Input, MaskInput} from "../../index";
 import '../DetailBox.scss';
 
 interface IDetailBox {
     textAreaTitle: string,
-    parag: string,
+    description: string
 }
 
-const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag}) => {
-
+const DetailBox:FC<IDetailBox> = ({textAreaTitle, description}) => {
     return (
         <Box className="detail-box">
             <div className="box__content">
@@ -21,6 +20,7 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag}) => {
                             rules={[
                                 {
                                     required: true,
+                                    message: "Please input your card holder name!",
                                 }
                             ]}
                         >
@@ -31,6 +31,7 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag}) => {
                             rules={[
                                 {
                                     required: true,
+                                    message: "Please input your card number!",
                                 }
                             ]}
                         >
@@ -41,6 +42,7 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag}) => {
                             rules={[
                                 {
                                     required: true,
+                                    message: "Please input your expire date!",
                                 }
                             ]}
                         >
@@ -51,16 +53,17 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag}) => {
                             rules={[
                                 {
                                     required: true,
+                                    message: "Please input your cvv!",
                                 }
                             ]}
                         >
-                            <MaskInput mask="000" placeholder="CVV" label="CVV" />
+                            <Input maxLength={3} type="password" label="CVV"/>
                         </Form.Item>
                     </div>
                 </div>
                 <div className="detail-box__description">
                     <span className="box__title">{textAreaTitle}</span>
-                    <TextArea value={parag} />
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
             </div>
         </Box>

@@ -6,7 +6,6 @@ export const authSlice = createSlice({
     name: "auth",
     initialState: {
         user: null,
-        userControl: false,
         isLoading: true,
         error: null,
         pending: false,
@@ -20,10 +19,9 @@ export const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, {payload}) => {
                 state.user = payload;
-                state.userControl = true
                 state.isLoading = false;
             })
-            .addCase(login.rejected, (state:any, action) => {
+            .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.error.message;
             })

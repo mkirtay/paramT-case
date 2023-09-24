@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react'
-import { Input as AntdInput, InputProps } from "antd";
+import React, {useState, useRef, useEffect, MutableRefObject} from 'react'
+import {Input as AntdInput, InputProps, InputRef} from "antd";
 import classNames from "classnames";
 import './Input.scss';
 
@@ -10,20 +10,21 @@ interface IInput extends InputProps {
     inputIconLeft? : React.ReactNode
 }
 
+
 const Input : React.FC<IInput> = ({ inputIconLeft, label, value, ...props }) => {
     const [inputDirty, setInputDirty] = useState<boolean>(false);
     const inputRef : React.RefObject<any> = useRef();
 
     useEffect(() => {
-        if ( inputRef.current.input.value.length > 0 ) {
+        if (inputRef?.current?.input?.value.length > 0 ) {
             setInputDirty(true)
         }
     }, [inputRef.current])
 
-    const onFocusInput = (e:any) => {
+    const onFocusInput = () => {
         setInputDirty(true)
     }
-    const onBlurInput = (e:any) => {
+    const onBlurInput = (e : React.FocusEvent<HTMLInputElement>) => {
         if ( e.target.value.length === 0 ) {
             setInputDirty(false)
         } else {

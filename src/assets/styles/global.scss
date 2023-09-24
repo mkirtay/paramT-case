@@ -3,6 +3,7 @@
 @import "../../components/components.scss";
 
 html, body {
+  font-family: "Poppins", sans-serif !important;
   position: relative;
   width: 100%;
   height: 100%;
@@ -11,6 +12,7 @@ html, body {
   background: $concrete;
 
   * {
+    font-family: "Poppins", sans-serif !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

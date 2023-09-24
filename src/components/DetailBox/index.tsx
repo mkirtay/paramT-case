@@ -20,8 +20,8 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag, data, selectedIndex}) =
     }, [])
 
     useEffect(() => {
-        const newData : any = data?.find((item: any) => item.id === selectedIndex)
-        setDetailPageData(newData)
+        const newData : IPackage | undefined = data?.find((item: IPackage) => item.id === selectedIndex)
+        newData && setDetailPageData(newData)
     }, [selectedIndex])
 
     return (
@@ -32,7 +32,7 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, parag, data, selectedIndex}) =
                     <img className="header__logo" src="images/image-2.png" alt="Detail Img"/>
                 </div>
                 <div className="detail-box__description">
-                    <div>
+                    <div className="detail-box__description__head">
                         <span className="box__title">{textAreaTitle}</span>
                         <div>
                             { detailPageData?.tags.map((item:string, key: number) => {

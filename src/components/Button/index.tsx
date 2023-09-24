@@ -5,7 +5,7 @@ import './Button.scss';
 interface IButton extends ButtonProps {
     full?: boolean,
     buttonType?: string
-    iconLeft?: any,
+    iconLeft?: React.ReactNode,
 }
 
 const Button : React.FC<IButton> = ({ full, buttonType, iconLeft,  ...props }) => {

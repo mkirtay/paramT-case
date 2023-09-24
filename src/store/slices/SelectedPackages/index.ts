@@ -1,15 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IPackage} from "../../../utilities/types";
 
-const initialState : any = {
-    selectedItems: null
+const initialState : {selectedItems: []} = {
+    selectedItems: []
 };
 
 export const selectedPackages = createSlice({
     name: "selectedItems",
     initialState,
     reducers: {
-        setSelectedPackages: (state:any, action:any) => {
+        setSelectedPackages: (state: {selectedItems: []}, action:any) => {
             state.selectedItems = action.payload;
         },
     }
