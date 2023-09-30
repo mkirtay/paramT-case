@@ -1,6 +1,5 @@
 import {Form} from "antd";
 import {Box, Input, Button} from "../../components/index";
-import {post} from "../../utilities/http/index";
 import './Login.scss';
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -15,12 +14,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onFinish = async (values: IFormValues) => {
-        await post('signup', {
-            ...values
-        })
-        dispatch(login(values.fullName))
-        await navigate("/list");
+        const req = await dispatch(login(values))
+
+        if (req.payload) {
+            await navigate("/list");
+        }
     }
+
     return <div className="login-layout">
         <Box>
             <Form

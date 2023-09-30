@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {authReducer, selectedPackagesReducer} from "./slices";
+import {authReducer, allPackagesReducer, selectedPackagesReducer, agreementSlice, paymentSlice} from "./slices";
 
 const store = configureStore({
     reducer: {
         selectedPackages: selectedPackagesReducer,
-        auth: authReducer
+        allPackages: allPackagesReducer,
+        auth: authReducer,
+        agreement: agreementSlice,
+        paymentSlice: paymentSlice,
     }
 })
 

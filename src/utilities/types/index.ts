@@ -24,3 +24,9 @@ export interface ISelectedPackages {
         selectedItems: []
     }
 }
+
+export interface IAuth {
+    auth: {
+        user: string
+    }
+}

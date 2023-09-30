@@ -5,7 +5,7 @@ import {  login } from "./actions";
 export const authSlice = createSlice({
     name: "auth",
     initialState: {
-        user: null,
+        login: false,
         isLoading: true,
         error: null,
         pending: false,
@@ -13,12 +13,8 @@ export const authSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state) => {
-                state.isLoading = true;
-                state.pending = true;
-            })
-            .addCase(login.fulfilled, (state, {payload}) => {
-                state.user = payload;
+            .addCase(login.fulfilled, (state, action ) => {
+                state.login = action.payload;
                 state.isLoading = false;
             })
             .addCase(login.rejected, (state, action) => {

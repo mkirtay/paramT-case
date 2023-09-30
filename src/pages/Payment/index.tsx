@@ -1,29 +1,29 @@
 import {useEffect, useState} from "react";
 import {Form} from "antd";
-import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {Box, Basket, PaymentBox, SuccessModal} from "../../components";
 import isFormValid from "../../utilities/functions/IsFormValid";
 import TotalPrice from "../../utilities/functions/TotalPrice";
 import {IPackage, IPayment, ISelectedPackages} from "../../utilities/types";
-import {get, post} from "../../utilities/http";
+import {agreementAction} from "../../store/slices/Agreement/actions";
+import {paymentAction} from "../../store/slices/Payment/actions";
 import '../Detail/Detail.scss';
-import {Navigate} from "react-router-dom";
-
 
 const Payment = () => {
     const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
-    const [agreementHtml, setAgreementHtml] = useState<string>('');
+    const dispatch = useDispatch();
 
     const [form] = Form.useForm();
-    const selectedPackages = useSelector((state: ISelectedPackages) => state.selectedPackages.selectedItems)
+    const selectedPackages = useSelector((state: ISelectedPackages) => state?.selectedPackages?.selectedItems)
+    const agreementHtml = useSelector((state: any) => state?.agreement?.file)
 
-    const fetch = async () => {
-        const agreement = await get('payment')
-        setAgreementHtml(decodeURIComponent(agreement.content))
+    const getAgreement = async () => {
+        await dispatch(agreementAction())
     }
 
     useEffect(() => {
-        fetch()
+        getAgreement()
     }, [])
 
     const onFinish = async (values: IPayment) => {
@@ -32,13 +32,13 @@ const Payment = () => {
         })
 
         if (!isFormValid(form)) {
-            const req = await post('payment', {
+            const req = await dispatch(paymentAction({
                 ...values,
                 packagesIds: getIdPackages,
                 totalAmount: TotalPrice(selectedPackages),
-            })
+            }))
 
-            req && setShowSuccessModal(true)
+            req?.payload && setShowSuccessModal(true)
         }
     }
 

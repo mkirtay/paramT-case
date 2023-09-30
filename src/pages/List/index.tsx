@@ -1,38 +1,44 @@
 import {Box, Button, Package} from "../../components";
-import {get} from "../../utilities/http";
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './List.scss';
 import {IPackage} from "../../utilities/types";
 import TotalPrice from "../../utilities/functions/TotalPrice";
 import { useNavigate } from "react-router-dom";
+import { allPackagesAction } from "../../store/slices/AllPackages/actions"
+import { selectedPackageAction } from "../../store/slices/SelectedPackages2/actions"
 
-
-import {setSelectedPackages} from "../../store/slices/SelectedPackages";
+interface IPackagesStore {
+    allPackages: {
+        packages: IPackage[]
+    }
+}
 
 const List = ( ) => {
-    const [list, setList] = useState<IPackage[]>([])
-    const [selectedItems, setSelectedItems] = useState<IPackage[] | any>([])
+    const getPackages = useSelector((state: IPackagesStore) => state?.allPackages?.packages)
+
+    const [selectedItems, setSelectedItems] = useState<IPackage[]>([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
-    const fetch = async () => {
-        const list = await get('packages')
-        setList(list)
+    const getAllPackages = async () => {
+        await dispatch(allPackagesAction())
     }
 
     useEffect(() => {
-        fetch();
+        getAllPackages()
     }, [])
 
     const onSelectPackage = (value: IPackage) => {
         setSelectedItems([...selectedItems, value]);
     }
 
-    const nextStep = () => {
-        dispatch(setSelectedPackages(selectedItems))
-        navigate("/detail");
+    const nextStep = async () => {
+        const req = await dispatch(selectedPackageAction(selectedItems))
+
+        if (req?.meta?.requestStatus === 'fulfilled') {
+            navigate('/detail')
+        }
     }
 
 
@@ -48,7 +54,7 @@ const List = ( ) => {
         <div className="list-page">
             <Box foot={<BoxActions />}>
                 <div className="box__content">
-                    {list && list?.map((item: IPackage, key: number) => {
+                    {getPackages && getPackages?.map((item: IPackage, key: number) => {
                         return <Package name={item?.name}
                                         details={item?.details}
                                         tags={item?.tags}

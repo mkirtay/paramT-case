@@ -4,6 +4,8 @@ import {Header} from "../../components";
 export const ProtectedIn = () => {
     const active: string | null  = localStorage.getItem('active');
 
+    console.log(active, 'active')
+
     return (
         active && JSON.parse(active) ? <div className="layout">
             <Header/>

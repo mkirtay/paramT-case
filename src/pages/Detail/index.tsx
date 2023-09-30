@@ -7,7 +7,7 @@ import {ISelectedPackages} from "../../utilities/types";
 
 const List = () => {
     const [selectedIndex, setSelectedIndex] = useState<number>(0)
-    const selectedPackages = useSelector((state: ISelectedPackages) => state.selectedPackages.selectedItems)
+    const selectedPackages = useSelector((state: ISelectedPackages) => state?.selectedPackages.selectedItems)
     const navigate = useNavigate();
 
     const nextStep = () => {

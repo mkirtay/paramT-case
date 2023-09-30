@@ -63,7 +63,7 @@ const DetailBox:FC<IDetailBox> = ({textAreaTitle, description}) => {
                 </div>
                 <div className="detail-box__description">
                     <span className="box__title">{textAreaTitle}</span>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                    { description && <div dangerouslySetInnerHTML={{ __html: description }} /> }
                 </div>
             </div>
         </Box>
